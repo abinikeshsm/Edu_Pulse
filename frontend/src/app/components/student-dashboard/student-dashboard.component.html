@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Student Dashboard</h2>
+  <div>
+    <label>Email</label><input #email />
+    <label>Password</label><input #password type="password" />
+    <button (click)="loginUser(email.value, password.value)">Login</button>
+  </div>
+  <hr />
+  <div *ngIf="!currentQuiz">
+    <h3>Available Quizzes</h3>
+    <ul>
+      <li *ngFor="let q of quizzes">
+        {{q.topic}} - <button (click)="openQuiz(q._id)">Take</button>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="currentQuiz">
+    <h3>{{currentQuiz.topic}}</h3>
+    <form>
+      <div *ngFor="let question of currentQuiz.questions; let i = index">
+        <p>{{question.q}}</p>
+        <label><input type="radio" name="q{{i}}" value="a" (change)="answers[i]='a'"/> {{question.a}}</label><br/>
+        <label><input type="radio" name="q{{i}}" value="b" (change)="answers[i]='b'"/> {{question.b}}</label><br/>
+        <label><input type="radio" name="q{{i}}" value="c" (change)="answers[i]='c'"/> {{question.c}}</label><br/>
+        <label><input type="radio" name="q{{i}}" value="d" (change)="answers[i]='d'"/> {{question.d}}</label>
+      </div>
+      <button type="button" (click)="submitCurrent()">Submit</button>
+      <button type="button" (click)="currentQuiz=null">Cancel</button>
+    </form>
+  </div>
+</div>

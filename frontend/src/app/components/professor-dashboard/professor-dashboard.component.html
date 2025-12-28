@@ -1,0 +1,18 @@
+<div class="container">
+  <h2>Professor Dashboard</h2>
+  <div>
+    <label>Email</label>
+    <input [(ngModel)]="email" placeholder="email" />
+    <label>Password</label>
+    <input type="password" [(ngModel)]="password" placeholder="password" />
+    <button (click)="loginUser()">Login</button>
+    <button (click)="registerUser()">Register as Professor</button>
+  </div>
+  <hr />
+  <div>
+    <label>Topic</label>
+    <input [(ngModel)]="topic" placeholder="Enter topic" />
+    <button (click)="generate()">Generate Quiz</button>
+    <p>Quiz generation is currently mocked in the backend.</p>
+  </div>
+</div>
