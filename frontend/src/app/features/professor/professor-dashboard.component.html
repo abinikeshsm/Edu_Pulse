@@ -1,0 +1,118 @@
+<section class="dashboard-grid">
+  <article class="panel">
+    <h1>Professor Dashboard</h1>
+    <p>Create AI-powered quizzes from your lecture content and assign instantly.</p>
+
+    <label>
+      Quiz Topic
+      <input [(ngModel)]="topic" type="text" />
+    </label>
+
+    <label>
+      Lecture Notes / Prompt
+      <textarea [(ngModel)]="notes" rows="4"></textarea>
+    </label>
+
+    <div class="row">
+      <label>
+        Difficulty
+        <select [(ngModel)]="difficulty">
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+      </label>
+      <label>
+        Questions
+        <input [(ngModel)]="questionCount" type="number" min="3" max="10" />
+      </label>
+    </div>
+
+    <label>
+      Assign Students
+      <div class="row">
+        <select [(ngModel)]="selectedStudentId">
+          <option value="">Select student</option>
+          @for (student of students(); track student.id) {
+            <option [value]="student.id">{{ student.name }}</option>
+          }
+        </select>
+        <button type="button" class="secondary" (click)="addSelectedStudent()">Add</button>
+      </div>
+    </label>
+
+    @if (selectedStudentIds().length) {
+      <p>
+        Selected:
+        @for (studentId of selectedStudentIds(); track studentId; let isLast = $last) {
+          <button type="button" class="secondary" (click)="removeSelectedStudent(studentId)">
+            {{ getStudentName(studentId) }} x
+          </button>
+          @if (!isLast) {
+            <span> </span>
+          }
+        }
+      </p>
+    } @else {
+      <p>No student selected. Quiz will be assigned to all students.</p>
+    }
+
+    <div class="actions">
+      <button type="button" (click)="generatePreview()" [disabled]="loading()">
+        {{ loading() ? 'Generating...' : 'Generate with Gemini Flow' }}
+      </button>
+      <button type="button" class="secondary" (click)="publishQuiz()" [disabled]="loading()">
+        Publish Quiz
+      </button>
+    </div>
+
+    @if (statusMessage()) {
+      <p class="status">{{ statusMessage() }}</p>
+    }
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+  </article>
+
+  <article class="panel">
+    <h2>AI Question Preview</h2>
+    @for (question of previewQuestions(); track question.id) {
+      <div class="question">
+        <p><strong>{{ question.prompt }}</strong></p>
+        <ol>
+          @for (option of question.options; track option) {
+            <li>{{ option }}</li>
+          }
+        </ol>
+      </div>
+    } @empty {
+      <p>Generate a preview to inspect AI-created MCQs before publishing.</p>
+    }
+  </article>
+</section>
+
+<section class="dashboard-grid lower">
+  <article class="panel">
+    <h2>Published Quizzes</h2>
+    @for (quiz of quizzes(); track quiz.id) {
+      <div class="card">
+        <p><strong>{{ quiz.title }}</strong></p>
+        <p>{{ quiz.questions.length }} questions - {{ quiz.difficulty }}</p>
+        <p>Assigned: {{ getAssignedStudentNames(quiz) }}</p>
+      </div>
+    } @empty {
+      <p>No quizzes published yet.</p>
+    }
+  </article>
+
+  <article class="panel">
+    <h2>Live Leaderboard Snapshot</h2>
+    @for (entry of leaderboard(); track entry.studentId) {
+      <div class="leader-row">
+        <span>{{ entry.studentName }}</span>
+        <span>{{ entry.totalPoints }} pts</span>
+      </div>
+    }
+    <a routerLink="/leaderboard" class="full-link">Open Full Leaderboard</a>
+  </article>
+</section>

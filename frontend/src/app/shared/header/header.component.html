@@ -1,0 +1,20 @@
+<header class="header">
+  <a routerLink="/auth" class="brand">
+    <span class="brand-badge">EP</span>
+    <span>
+      <strong>EduPulse AI</strong>
+      <small>Generative Learning Ecosystem</small>
+    </span>
+  </a>
+
+  <nav class="nav-links">
+    @if (user(); as currentUser) {
+      <span>{{ currentUser.name }}</span>
+      <a [routerLink]="['/', currentUser.role]">Dashboard</a>
+      <a routerLink="/leaderboard">Leaderboard</a>
+      <button type="button" (click)="logout()">Logout</button>
+    } @else {
+      <a routerLink="/auth">Login</a>
+    }
+  </nav>
+</header>

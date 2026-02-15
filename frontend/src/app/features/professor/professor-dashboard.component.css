@@ -1,0 +1,113 @@
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1rem;
+}
+
+.dashboard-grid.lower {
+  margin-top: 1rem;
+}
+
+.panel {
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(12, 23, 41, 0.64);
+  padding: 1rem;
+}
+
+h1,
+h2 {
+  margin-top: 0;
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+
+input,
+textarea,
+select {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  border-radius: 10px;
+  padding: 0.6rem;
+  font: inherit;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.students {
+  margin-top: 1rem;
+}
+
+.checkbox {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.45rem;
+}
+
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.6rem;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 0.85rem;
+  background: linear-gradient(120deg, #f4a261, #e76f51);
+  color: #0f2038;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #2a9d8f;
+  color: #091d33;
+}
+
+.status {
+  margin: 0.8rem 0 0;
+  color: #ffd8a8;
+}
+
+.question {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-top: 0.6rem;
+  padding: 0.6rem;
+}
+
+.card,
+.leader-row {
+  margin-top: 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 0.6rem;
+}
+
+.leader-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.full-link {
+  display: inline-block;
+  margin-top: 0.8rem;
+  color: #ffdca6;
+}
+
+@media (max-width: 980px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}

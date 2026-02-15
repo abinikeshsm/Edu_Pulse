@@ -1,0 +1,27 @@
+<section class="panel">
+  <h1>Real-Time Leaderboard</h1>
+  <p>Live ranking based on quiz score totals and answer accuracy.</p>
+  @if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  }
+
+  <div class="table-head">
+    <span>Rank</span>
+    <span>Student</span>
+    <span>Points</span>
+    <span>Quizzes</span>
+    <span>Accuracy</span>
+    <span>Last Active</span>
+  </div>
+
+  @for (entry of entries(); track entry.studentId; let i = $index) {
+    <div class="table-row" [class.me]="entry.studentId === currentUser()?.id">
+      <span>#{{ i + 1 }}</span>
+      <span>{{ entry.studentName }}</span>
+      <span>{{ entry.totalPoints }}</span>
+      <span>{{ entry.quizzesTaken }}</span>
+      <span>{{ entry.accuracy }}%</span>
+      <span>{{ entry.lastActive ? (entry.lastActive | date: 'short') : 'No attempts' }}</span>
+    </div>
+  }
+</section>

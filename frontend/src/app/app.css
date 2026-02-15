@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+}
+
+.app-shell {
+  min-height: 100dvh;
+}
+
+.app-main {
+  width: min(1160px, 92vw);
+  margin: 0 auto;
+  padding: 1.25rem 0 2.5rem;
+}

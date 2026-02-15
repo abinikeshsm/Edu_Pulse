@@ -1,0 +1,48 @@
+<section class="panel">
+  @if (loading()) {
+    <h1>Loading quiz...</h1>
+  } @else if (quiz(); as activeQuiz) {
+    <h1>{{ activeQuiz.title }}</h1>
+    <p>
+      Topic: {{ activeQuiz.topic }} - Difficulty: {{ activeQuiz.difficulty }} - Questions:
+      {{ activeQuiz.questions.length }}
+    </p>
+
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+
+    @for (question of activeQuiz.questions; track question.id; let questionIndex = $index) {
+      <article class="question-card">
+        <p><strong>Q{{ questionIndex + 1 }}. {{ question.prompt }}</strong></p>
+        @for (option of question.options; track option; let optionIndex = $index) {
+          <label class="option">
+            <input
+              type="radio"
+              [checked]="selectedAnswers()[questionIndex] === optionIndex"
+              (change)="selectAnswer(questionIndex, optionIndex)"
+            />
+            {{ option }}
+          </label>
+        }
+      </article>
+    }
+
+    @if (score() !== null) {
+      <div class="result">
+        <h2>Score: {{ score() }}/{{ activeQuiz.questions.length }}</h2>
+        <p>Submitted: {{ submittedAt() | date: 'medium' }}</p>
+        <a routerLink="/student">Back to Dashboard</a>
+        <a routerLink="/leaderboard">Open Leaderboard</a>
+      </div>
+    } @else {
+      <button type="button" (click)="submit()" [disabled]="loading()">Submit Quiz</button>
+    }
+  } @else {
+    <h1>Quiz Not Found</h1>
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+    <a routerLink="/student">Back to Dashboard</a>
+  }
+</section>

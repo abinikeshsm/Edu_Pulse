@@ -1,0 +1,68 @@
+<section class="grid">
+  <article class="panel">
+    <h1>Student Dashboard</h1>
+    <p>Take assigned quizzes, review instant scores, and track your leaderboard rank.</p>
+    @if (currentUser()) {
+      <p><strong>Welcome:</strong> {{ currentUser()?.name }}</p>
+    }
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+
+    <h3>Assigned Quizzes</h3>
+    @for (quiz of quizzes(); track quiz.id) {
+      <div class="quiz-card">
+        <div>
+          <p><strong>{{ quiz.title }}</strong></p>
+          <p>{{ quiz.questions.length }} questions - {{ quiz.difficulty }}</p>
+        </div>
+        <a [routerLink]="['/quiz', quiz.id]">Start</a>
+      </div>
+    } @empty {
+      <p>No assigned quizzes yet.</p>
+    }
+  </article>
+
+  <article class="panel">
+    <h2>AI Learning Summary</h2>
+    <label>
+      Paste lecture notes
+      <textarea [(ngModel)]="notesInput" rows="6"></textarea>
+    </label>
+    <button type="button" (click)="generateSummary()">Summarize Notes</button>
+
+    @if (summary().length) {
+      <ul>
+        @for (point of summary(); track point) {
+          <li>{{ point }}</li>
+        }
+      </ul>
+    }
+  </article>
+</section>
+
+<section class="grid lower">
+  <article class="panel">
+    <h2>Attempt History</h2>
+    @for (attempt of attempts(); track attempt.id) {
+      <div class="attempt-row">
+        <span>{{ attempt.score }}/{{ attempt.total }}</span>
+        <span>{{ accuracy(attempt.score, attempt.total) | percent }}</span>
+        <span>{{ attempt.submittedAt | date: 'medium' }}</span>
+      </div>
+    } @empty {
+      <p>Take your first quiz to populate this section.</p>
+    }
+  </article>
+
+  <article class="panel">
+    <h2>Top Learners</h2>
+    @for (entry of leaderboardTop(); track entry.studentId) {
+      <div class="leader-row">
+        <span>{{ entry.studentName }}</span>
+        <span>{{ entry.totalPoints }} pts</span>
+      </div>
+    }
+    <a routerLink="/leaderboard">View Full Leaderboard</a>
+  </article>
+</section>

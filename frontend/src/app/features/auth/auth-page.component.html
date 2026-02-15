@@ -1,0 +1,73 @@
+<section class="hero">
+  <div class="hero-copy panel">
+    <p class="chip">EduPulse AI</p>
+    <h1>A Generative Learning Ecosystem for Automated Assessment and Student Engagement</h1>
+    <p>
+      Students summarize notes and self-test instantly. Professors generate high-quality quizzes from
+      lecture topics, assign them to a class, and monitor a live leaderboard.
+    </p>
+
+    <div class="grid">
+      <article>
+        <h3>Existing System</h3>
+        <ul>
+          <li>Manual quiz creation and repetitive question patterns.</li>
+          <li>Delayed score feedback and low learning momentum.</li>
+          <li>Static note reading with weak retention.</li>
+        </ul>
+      </article>
+      <article>
+        <h3>Proposed System</h3>
+        <ul>
+          <li>Gemini-powered quiz generation in seconds.</li>
+          <li>Instant evaluation and live rank visibility.</li>
+          <li>Role-based experience for professors and students.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+
+  <form class="auth panel" (ngSubmit)="login()">
+    <h2>Role-Based Access</h2>
+    <p>Pick a role and authenticate with backend APIs.</p>
+
+    <div class="role-switch">
+      <button type="button" [class.active]="mode === 'login'" (click)="selectMode('login')">Login</button>
+      <button type="button" [class.active]="mode === 'register'" (click)="selectMode('register')">
+        Register
+      </button>
+    </div>
+
+    <div class="role-switch">
+      <button type="button" [class.active]="role === 'professor'" (click)="selectRole('professor')">
+        Professor
+      </button>
+      <button type="button" [class.active]="role === 'student'" (click)="selectRole('student')">
+        Student
+      </button>
+    </div>
+
+    @if (mode === 'register') {
+      <label>
+        Name
+        <input [(ngModel)]="name" name="name" type="text" />
+      </label>
+    }
+    <label>
+      Email
+      <input [(ngModel)]="email" name="email" type="email" />
+    </label>
+    <label>
+      Password
+      <input [(ngModel)]="password" name="password" type="password" />
+    </label>
+
+    @if (error()) {
+      <p class="error">{{ error() }}</p>
+    }
+
+    <button type="submit" [disabled]="loading()">
+      {{ loading() ? 'Please wait...' : ((mode | titlecase) + ' as ' + (role | titlecase)) }}
+    </button>
+  </form>
+</section>

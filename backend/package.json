@@ -1,24 +1,23 @@
-{
-  "name": "backend",
+﻿{
+  "name": "edupulse-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "EduPulse AI backend API with Express, MongoDB, JWT, and Gemini integration",
+  "type": "module",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "seed": "node seed.js"
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "body-parser": "^2.2.1",
+    "@google/generative-ai": "^0.24.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1",
-    "jsonwebtoken": "^9.0.0",
-    "mongoose": "^9.0.2",
-    "nodemon": "^3.1.11"
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   }
 }

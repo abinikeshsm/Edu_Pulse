@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+:root {
+  --bg-1: #081625;
+  --bg-2: #13263f;
+  --text: #f8f5ef;
+  --muted: rgba(248, 245, 239, 0.78);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 16% 12%, rgba(233, 196, 106, 0.16), transparent 40%),
+    radial-gradient(circle at 87% 20%, rgba(231, 111, 81, 0.23), transparent 34%),
+    linear-gradient(160deg, var(--bg-1), var(--bg-2));
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Merriweather', Georgia, serif;
+}
+
+p {
+  color: var(--muted);
+}

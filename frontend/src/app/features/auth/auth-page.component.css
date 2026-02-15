@@ -1,0 +1,111 @@
+.hero {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 1rem;
+}
+
+.panel {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  background: rgba(12, 23, 41, 0.64);
+  padding: 1.25rem;
+}
+
+.chip {
+  display: inline-flex;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  color: #f9d7a3;
+  background: rgba(244, 162, 97, 0.2);
+  margin: 0 0 0.5rem;
+}
+
+h1 {
+  margin: 0;
+  line-height: 1.15;
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+}
+
+.grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+article {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 0.8rem;
+}
+
+ul {
+  margin: 0.4rem 0 0;
+  padding-inline-start: 1rem;
+}
+
+.auth label {
+  margin-top: 0.8rem;
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+
+input {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  border-radius: 10px;
+  padding: 0.55rem 0.65rem;
+  font: inherit;
+}
+
+.role-switch {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.role-switch button,
+form button[type='submit'] {
+  border: 0;
+  border-radius: 10px;
+  padding: 0.6rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.role-switch button {
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+}
+
+.role-switch button.active {
+  background: #f4a261;
+  color: #0f2135;
+}
+
+form button[type='submit'] {
+  margin-top: 1rem;
+  background: linear-gradient(120deg, #f4a261, #e76f51);
+  color: #0e1b2f;
+}
+
+.error {
+  color: #ffb4a2;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

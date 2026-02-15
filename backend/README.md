@@ -1,22 +1,53 @@
-# EduPulse AI - Backend
+﻿# EduPulse Backend (Node.js + Express + MongoDB)
 
-This is the Express backend for EduPulse AI.
+## Tech Stack
+- Node.js + Express
+- MongoDB Atlas + Mongoose
+- JWT Authentication
+- Gemini API (`@google/generative-ai`) for AI quiz generation
 
-Setup
+## 1) Setup
+1. `cd backend`
+2. `cp .env.example .env` (on Windows PowerShell: `Copy-Item .env.example .env`)
+3. Fill `.env` values (`MONGO_URI`, `JWT_SECRET`, `GEMINI_API_KEY`)
+4. `npm install`
+5. `npm run dev`
 
-1. Copy `.env.example` to `.env` and set `MONGO_URI` and `JWT_SECRET`.
-2. Install dependencies: `npm install`.
-3. Run dev server: `npm run dev`.
+Server runs on `http://localhost:5000` by default.
 
-API Endpoints
+## 2) API Endpoints
+### Health
+- `GET /api/health`
 
-- `GET /api/health` - health check
-- `POST /api/auth/register` - register user
-- `POST /api/auth/login` - login
-- `POST /api/quizzes/generate` - generate a quiz (professor)
-- `POST /api/quizzes/:id/submit` - submit quiz answers (student)
-- `GET /api/quizzes/:id/leaderboard` - get leaderboard for quiz
+### Auth
+- `POST /api/auth/register`
+  - body: `{ "name", "email", "password", "role": "professor|student" }`
+- `POST /api/auth/login`
+  - body: `{ "email", "password" }`
+- `GET /api/auth/me` (Bearer token)
 
-Note: Gemini API calls are mocked in development by `services/gemini.js`.
+### Quiz (Professor)
+- `POST /api/quizzes/generate` (Bearer professor)
+  - body: `{ "topic", "notes", "difficulty", "questionCount" }`
+- `POST /api/quizzes` (Bearer professor)
+  - body: `{ "title", "topic", "difficulty", "questions", "assignedTo" }`
+- `GET /api/quizzes/professor/me` (Bearer professor)
 
-**Important:** If you want to run `npm run seed` or start the server locally, ensure MongoDB is running on `localhost:27017` or set `MONGO_URI` in your `.env` to a MongoDB Atlas URI.
+### Quiz (Student)
+- `GET /api/quizzes/student/me` (Bearer student)
+- `GET /api/quizzes/:id` (Bearer student/professor with access)
+
+### Attempts
+- `POST /api/attempts/:quizId` (Bearer student)
+  - body: `{ "answers": [0,1,2], "durationSeconds": 95 }`
+- `GET /api/attempts/student/me` (Bearer student)
+
+### Leaderboard
+- `GET /api/leaderboard` (Bearer token)
+
+## 3) Frontend Integration Notes
+Use `Authorization: Bearer <token>` after login.
+Suggested Angular base URL: `http://localhost:5000/api`.
+
+## 4) Gemini Fallback
+If `GEMINI_API_KEY` is missing or generation fails, backend automatically uses fallback question generation.

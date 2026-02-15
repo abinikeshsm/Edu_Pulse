@@ -1,0 +1,90 @@
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid.lower {
+  margin-top: 1rem;
+}
+
+.panel {
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(12, 23, 41, 0.64);
+  padding: 1rem;
+}
+
+h1,
+h2 {
+  margin-top: 0;
+}
+
+.quiz-card,
+.attempt-row,
+.leader-row {
+  margin-top: 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 0.6rem;
+}
+
+.quiz-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.quiz-card a {
+  border-radius: 999px;
+  text-decoration: none;
+  padding: 0.35rem 0.8rem;
+  font-weight: 700;
+  color: #0e1e35;
+  background: #f4a261;
+}
+
+textarea {
+  width: 100%;
+  margin-top: 0.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: inherit;
+  border-radius: 10px;
+  padding: 0.6rem;
+  font: inherit;
+}
+
+button {
+  margin-top: 0.7rem;
+  border: none;
+  border-radius: 10px;
+  padding: 0.55rem 0.9rem;
+  font: inherit;
+  font-weight: 700;
+  color: #0d2137;
+  background: linear-gradient(120deg, #f4a261, #e9c46a);
+  cursor: pointer;
+}
+
+.attempt-row,
+.leader-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 0.6rem;
+}
+
+.leader-row {
+  grid-template-columns: 2fr 1fr;
+}
+
+a {
+  color: #ffd9a0;
+}
+
+@media (max-width: 980px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
